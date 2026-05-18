@@ -11,6 +11,7 @@ export default function ProfileScreen({
   const [editSheet, setEditSheet] = useState(null) // null | 'photo' | 'username' | 'name' | 'bio'
   const [editValue, setEditValue] = useState('')
   const [activePost, setActivePost] = useState(null)
+  const [showPostOptions, setShowPostOptions] = useState(false)
 
   const { photo, username, name, bio } = userProfile
 
@@ -413,12 +414,90 @@ export default function ProfileScreen({
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
               </motion.button>
+              
+              {activeTab === 'collection' && (
+                <div 
+                  style={{ position: 'relative' }}
+                  onMouseEnter={() => setShowPostOptions(true)}
+                  onMouseLeave={() => setShowPostOptions(false)}
+                >
+                  <motion.button whileTap={{ scale: 0.85 }} 
+                    className="icon-button-hover"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', padding: 4 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <circle cx="5" cy="12" r="2" />
+                      <circle cx="12" cy="12" r="2" />
+                      <circle cx="19" cy="12" r="2" />
+                    </svg>
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {showPostOptions && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        style={{
+                          position: 'absolute', right: 0, top: '100%', marginTop: 8,
+                          background: 'var(--bg-card)', border: '1px solid var(--glass-border)',
+                          borderRadius: 'var(--radius-md)', padding: 8, minWidth: 150,
+                          boxShadow: '0 4px 20px rgba(0,0,0,0.5)', zIndex: 10001
+                        }}
+                      >
+                        <button
+                          onClick={() => {
+                            setShowPostOptions(false)
+                            const btn = document.getElementById(`share-btn-${activePost.id}`)
+                            if (btn) btn.click()
+                          }}
+                          style={{
+                            width: '100%', padding: '12px 16px', background: 'none', border: 'none',
+                            color: 'var(--text-primary)', textAlign: 'left', fontFamily: 'var(--font-body)',
+                            fontSize: '0.9rem', cursor: 'pointer', borderRadius: '6px',
+                            display: 'flex', alignItems: 'center', gap: 10
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(240,235,225,0.05)'}
+                          onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                          </svg>
+                          Share
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowPostOptions(false)
+                            setActivePost(null)
+                            onDeletePost?.(activePost.id)
+                          }}
+                          style={{
+                            width: '100%', padding: '12px 16px', background: 'none', border: 'none',
+                            color: '#d97757', textAlign: 'left', fontFamily: 'var(--font-body)',
+                            fontSize: '0.9rem', cursor: 'pointer', borderRadius: '6px',
+                            display: 'flex', alignItems: 'center', gap: 10
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(240,235,225,0.05)'}
+                          onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                            <line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" />
+                          </svg>
+                          Delete
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
             </div>
             
             <div style={{ flex: 1, overflowY: 'auto' }}>
               <Card 
                 discovery={activePost} 
                 index={0} 
+                hideOptions={true}
                 onDeletePost={(id) => {
                   setActivePost(null)
                   onDeletePost?.(id)

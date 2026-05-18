@@ -76,7 +76,8 @@ export default function HomeScreen({ userPosts = [], onExplore, onProfileTap, on
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
+          position: 'relative'
         }}>
         {/* Wordmark Dropdown */}
         <div style={{ position: 'relative' }}>
@@ -142,31 +143,7 @@ export default function HomeScreen({ userPosts = [], onExplore, onProfileTap, on
             )}
           </AnimatePresence>
         </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
 
-            {/* Profile Avatar Button */}
-            <motion.button
-              onClick={onProfileTap}
-              whileTap={{ scale: 0.9 }}
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
-                background: 'rgba(200, 169, 110, 0.1)',
-                border: '1px solid rgba(200, 169, 110, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: 'var(--font-heading)',
-                fontSize: '0.9rem',
-                color: 'var(--accent-gold)',
-                cursor: 'pointer',
-                padding: 0,
-              }}
-            >
-              S
-            </motion.button>
-          </div>
         </div>
       </div>
 
@@ -179,19 +156,65 @@ export default function HomeScreen({ userPosts = [], onExplore, onProfileTap, on
         maxWidth: '720px',
         margin: '0 auto',
       }}>
-        {[...userPosts, ...items]
-          .filter(item => activeGenre === 'All' || item.contentType === activeGenre.toLowerCase())
-          .map((item, i) => (
-          <Card
-            key={item.id}
-            discovery={item}
-            index={i}
-            onLike={onLike}
-            onSave={onSave}
-            onUserTap={onUserTap}
-            onDeletePost={onDeletePost}
-          />
-        ))}
+        {(() => {
+          const filteredUserPosts = userPosts.filter(item => activeGenre === 'All' || item.contentType === activeGenre.toLowerCase());
+          const filteredItems = items.filter(item => activeGenre === 'All' || item.contentType === activeGenre.toLowerCase());
+
+          return (
+            <>
+              {filteredUserPosts.length > 1 ? (
+                <div style={{
+                  display: 'flex',
+                  overflowX: 'auto',
+                  scrollSnapType: 'x mandatory',
+                  gap: '16px',
+                  paddingBottom: '16px',
+                  margin: '0 -44px',
+                  paddingLeft: '44px',
+                  paddingRight: '44px',
+                  scrollbarWidth: 'none',
+                  WebkitOverflowScrolling: 'touch',
+                }}>
+                  {filteredUserPosts.map((item, i) => (
+                    <div key={item.id} style={{ minWidth: '90%', scrollSnapAlign: 'center', flexShrink: 0 }}>
+                      <Card
+                        discovery={item}
+                        index={i}
+                        onLike={onLike}
+                        onSave={onSave}
+                        onUserTap={onUserTap}
+                        onDeletePost={onDeletePost}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                filteredUserPosts.map((item, i) => (
+                  <Card
+                    key={item.id}
+                    discovery={item}
+                    index={i}
+                    onLike={onLike}
+                    onSave={onSave}
+                    onUserTap={onUserTap}
+                    onDeletePost={onDeletePost}
+                  />
+                ))
+              )}
+              {filteredItems.map((item, i) => (
+                <Card
+                  key={item.id}
+                  discovery={item}
+                  index={i + filteredUserPosts.length}
+                  onLike={onLike}
+                  onSave={onSave}
+                  onUserTap={onUserTap}
+                  onDeletePost={onDeletePost}
+                />
+              ))}
+            </>
+          );
+        })()}
       </div>
 
       {/* Loading indicator */}

@@ -12,6 +12,16 @@ const navItems = [
     ),
   },
   {
+    id: 'explore',
+    label: 'Search',
+    icon: (
+      <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+      </svg>
+    ),
+  },
+  {
     id: 'add',
     label: 'Drop',
     icon: (
@@ -23,12 +33,12 @@ const navItems = [
     ),
   },
   {
-    id: 'explore',
-    label: 'Search',
+    id: 'profile',
+    label: 'Profile',
     icon: (
       <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="8" />
-        <path d="M21 21l-4.35-4.35" />
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
       </svg>
     ),
   },

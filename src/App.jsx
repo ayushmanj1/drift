@@ -54,9 +54,32 @@ export default function App() {
   // ─── User profile view ───
   const [viewedUser, setViewedUser] = useState(null)
 
-  const navigate = useCallback((newScreen) => {
+  const navigate = useCallback((newScreen, addToHistory = true) => {
     setPrevScreen(screen)
     setScreen(newScreen)
+    if (addToHistory && appState === 'main') {
+      window.history.pushState({ screen: newScreen }, '', `#${newScreen}`)
+    }
+  }, [screen, appState])
+
+  useEffect(() => {
+    const handlePopState = (e) => {
+      if (e.state && e.state.screen) {
+        setPrevScreen(screen)
+        setScreen(e.state.screen)
+      } else if (window.location.hash) {
+        const hashScreen = window.location.hash.replace('#', '')
+        if (hashScreen) {
+          setPrevScreen(screen)
+          setScreen(hashScreen)
+        }
+      } else {
+        setPrevScreen(screen)
+        setScreen('home')
+      }
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
   }, [screen])
 
   // ─── Touch swipe handlers for mobile ───
