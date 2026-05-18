@@ -1,3 +1,6 @@
+// @ts-check
+
+/** @type {Object.<string, string>} */
 const INTEREST_MAP = {
   'cafe': 'amenity=cafe',
   'coffee': 'amenity=cafe',
@@ -34,6 +37,13 @@ const INTEREST_MAP = {
   'gas station': 'amenity=fuel',
 };
 
+/**
+ * @param {number} lat
+ * @param {number} lng
+ * @param {string[]} interests
+ * @param {number} [radius]
+ * @returns {Promise<any[]>}
+ */
 export async function fetchNearbyPlaces(lat, lng, interests, radius = 3000) {
   if (!lat || !lng || !interests || interests.length === 0) return [];
 
@@ -41,7 +51,7 @@ export async function fetchNearbyPlaces(lat, lng, interests, radius = 3000) {
   const nodes = interests
     .map(interest => INTEREST_MAP[interest.toLowerCase()])
     .filter(Boolean)
-    .map(tag => {
+    .map(/** @param {string} tag */ tag => {
       const [key, val] = tag.split('=');
       return `node["${key}"="${val}"](around:${radius},${lat},${lng});`;
     })
@@ -68,7 +78,7 @@ out body 80;
     }
 
     const data = await response.json();
-    return data.elements.map(el => {
+    return data.elements.map(/** @param {any} el */ el => {
       // Find the tag that matches one of our interests to use as 'type'
       let type = 'place';
       for (const [key, val] of Object.entries(el.tags || {})) {
@@ -97,6 +107,13 @@ out body 80;
 }
 
 // Search by name using Nominatim (much better for specific place names)
+/**
+ * @param {number} lat
+ * @param {number} lng
+ * @param {string} name
+ * @param {number} [radius]
+ * @returns {Promise<any[]>}
+ */
 export async function searchPlacesByName(lat, lng, name, radius = 5000) {
   if (!lat || !lng || !name) return [];
 
@@ -128,8 +145,8 @@ export async function searchPlacesByName(lat, lng, name, radius = 5000) {
 
     const data = await response.json();
     return data
-      .filter(el => el.lat && el.lon)
-      .map(el => {
+      .filter(/** @param {any} el */ el => el.lat && el.lon)
+      .map(/** @param {any} el */ el => {
         // Determine type from class/type
         let type = 'place';
         if (el.type === 'cafe' || el.class === 'amenity' && el.type === 'cafe') type = 'cafe';
