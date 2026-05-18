@@ -16,19 +16,24 @@ router.post('/signup', async (req, res) => {
       });
     }
 
-    // Check if username is already taken
-    const { data: existing } = await supabaseAdmin
+    // Check if username or email is already taken
+    const { data: existingUser } = await supabaseAdmin
       .from('users')
-      .select('id')
-      .eq('username', username)
+      .select('id, username, email')
+      .or(`username.eq.${username},email.eq.${email}`)
+      .limit(1)
       .single();
 
-    if (existing) {
-      return res.status(409).json({
-        success: false,
-        error: 'Username is already taken',
-      });
+    if (existingUser) {
+      if (existingUser.username === username) {
+        return res.status(409).json({ success: false, error: 'Username is already taken' });
+      }
+      if (existingUser.email === email) {
+        return res.status(409).json({ success: false, error: 'Email is already registered. Please sign in instead.' });
+      }
     }
+
+
 
     // Create auth user in Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signUp({
