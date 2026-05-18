@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import SplashScreen from './screens/SplashScreen'
 import OnboardingScreen from './screens/OnboardingScreen'
 import HomeScreen from './screens/HomeScreen'
+import AuthScreen from './screens/AuthScreen'
 
 import ProfileScreen from './screens/ProfileScreen'
 import DiscoveryScreen from './screens/DiscoveryScreen'
@@ -135,11 +136,18 @@ export default function App() {
   }, [])
 
   const handleOnboardingComplete = useCallback(() => {
+    setAppState('auth')
+  }, [])
+
+  const handleLoginComplete = useCallback((user) => {
+    // We can store user in state if we want, for now just go to main
     setAppState('main')
   }, [])
 
   const handleLogout = useCallback(() => {
-    setAppState('splash')
+    localStorage.removeItem('drift-token')
+    localStorage.removeItem('drift-user')
+    setAppState('auth')
     setScreen('home')
   }, [])
 
@@ -302,6 +310,11 @@ export default function App() {
       {/* Onboarding */}
       {appState === 'onboarding' && (
         <OnboardingScreen onComplete={handleOnboardingComplete} />
+      )}
+
+      {/* Auth */}
+      {appState === 'auth' && (
+        <AuthScreen onLogin={handleLoginComplete} />
       )}
 
       {/* Main app */}
