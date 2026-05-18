@@ -59,6 +59,37 @@ export default function App() {
     setScreen(newScreen)
   }, [screen])
 
+  // ─── Touch swipe handlers for mobile ───
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEndHandler = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (screen === 'explore') return // disable swipe on map to allow panning
+
+    if (isLeftSwipe) {
+      if (screen === 'home') navigate('add')
+      else if (screen === 'add') navigate('explore')
+    } else if (isRightSwipe) {
+      if (screen === 'explore') navigate('add')
+      else if (screen === 'add') navigate('home')
+      else if (screen !== 'home') navigate(prevScreen || 'home')
+    }
+  }
+
   // ─── Post created handler ───
   const handlePostCreated = useCallback((post) => {
     setUserPosts(prev => [{ 
@@ -233,7 +264,13 @@ export default function App() {
   }
 
   return (
-    <div className="film-grain" style={{ minHeight: '100vh', position: 'relative' }}>
+    <div 
+      className="film-grain" 
+      style={{ minHeight: '100vh', position: 'relative', overflowX: 'hidden' }}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEndHandler}
+    >
       {/* Splash */}
       {appState === 'splash' && (
         <SplashScreen onComplete={handleSplashComplete} />
@@ -250,10 +287,11 @@ export default function App() {
           <AnimatePresence mode="wait">
             <motion.div
               key={screen}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              style={{ width: '100%', height: '100%' }}
             >
               {renderScreen()}
             </motion.div>
