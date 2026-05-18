@@ -1,0 +1,212 @@
+// ─── DISCOVERY FEED DATA ───
+export const discoveries = [
+  {
+    id: 1,
+    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80',
+    category: 'café',
+    location: 'Shimokitazawa, Tokyo',
+    caption: 'Went here during rain. Felt like being inside an old movie.',
+    moods: ['rainy-night', 'solitude', 'warmth'],
+    resonated: 214,
+    user: '@haruki',
+  },
+  {
+    id: 2,
+    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',
+    category: 'place',
+    location: 'Somewhere in the Alps',
+    caption: 'The kind of silence that makes you hear your own thoughts clearly.',
+    moods: ['existential', 'solitude', 'dreamy'],
+    resonated: 187,
+    user: '@luna',
+  },
+  {
+    id: 3,
+    image: 'https://images.unsplash.com/photo-1526243741027-444d633d7365?w=800&q=80',
+    category: 'bookstore',
+    location: 'Notting Hill, London',
+    caption: 'Found a first edition Murakami here. The owner didn\'t even know.',
+    moods: ['discovery', 'warmth', 'nostalgia'],
+    resonated: 342,
+    user: '@page.turner',
+  },
+  {
+    id: 4,
+    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+    category: 'music',
+    location: 'basement venue, Brooklyn',
+    caption: 'Thirty people in a basement. The guitarist was crying. Nobody left.',
+    moods: ['chaotic', 'in love', 'underground'],
+    resonated: 456,
+    user: '@midnight.set',
+  },
+  {
+    id: 5,
+    image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80',
+    category: 'place',
+    location: 'Lake Bled, Slovenia',
+    caption: 'Woke up at 4am for this. The fog was still sleeping on the water.',
+    moods: ['dreamy', 'solitude', 'romantic'],
+    resonated: 523,
+    user: '@dawnchaser',
+  },
+  {
+    id: 6,
+    image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80',
+    category: 'cinema',
+    location: 'Le Champo, Paris',
+    caption: 'They still play 35mm here. The scratches on the film are part of the story.',
+    moods: ['nostalgia', 'romantic', 'warmth'],
+    resonated: 298,
+    user: '@cineaste',
+  },
+  {
+    id: 7,
+    image: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&q=80',
+    category: 'café',
+    location: 'Lisbon, Portugal',
+    caption: 'An old man plays fado here every Thursday. Nobody claps. Everyone feels.',
+    moods: ['melancholy', 'in love', 'warmth'],
+    resonated: 189,
+    user: '@saudade',
+  },
+  {
+    id: 8,
+    image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80',
+    category: 'place',
+    location: 'Scottish Highlands',
+    caption: 'Drove for three hours to find nothing. That was the whole point.',
+    moods: ['existential', 'solitude', 'restless'],
+    resonated: 167,
+    user: '@wanderlost',
+  },
+  {
+    id: 9,
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80',
+    category: 'music',
+    location: 'vinyl shop, Shibuya',
+    caption: 'The owner recommended an album. Said it would change my week. It changed my year.',
+    moods: ['discovery', 'warmth', 'underground'],
+    resonated: 391,
+    user: '@analog.soul',
+  },
+  {
+    id: 10,
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+    category: 'restaurant',
+    location: 'hidden alley, Rome',
+    caption: 'No menu. The grandmother just brings you whatever she made that morning.',
+    moods: ['warmth', 'nostalgia', 'romantic'],
+    resonated: 612,
+    user: '@nonna.knows',
+  },
+  {
+    id: 11,
+    image: 'https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?w=800&q=80',
+    category: 'place',
+    location: 'Atacama Desert, Chile',
+    caption: 'Laid on the sand at midnight. The Milky Way felt close enough to touch.',
+    moods: ['existential', 'dreamy', 'numb'],
+    resonated: 445,
+    user: '@starfield',
+  },
+  {
+    id: 12,
+    image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+    category: 'place',
+    location: 'train, somewhere in India',
+    caption: 'A stranger shared chai and told me about the love of his life. We never exchanged names.',
+    moods: ['romantic', 'melancholy', 'warmth'],
+    resonated: 334,
+    user: '@passing.through',
+  },
+  {
+    id: 13,
+    image: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800&q=80',
+    category: 'place',
+    location: 'coastal village, Portugal',
+    caption: 'The cliff edge where the land just... gives up. Most honest place I\'ve ever stood.',
+    moods: ['existential', 'solitude', 'restless'],
+    resonated: 278,
+    user: '@edgewalker',
+  },
+  {
+    id: 14,
+    image: 'https://images.unsplash.com/photo-1495195134756-60a79b4b5c60?w=800&q=80',
+    category: 'photography',
+    location: 'abandoned greenhouse',
+    caption: 'Nature was taking the building back. Slowly. Patiently. Like it always does.',
+    moods: ['dreamy', 'solitude', 'numb'],
+    resonated: 203,
+    user: '@decaydreams',
+  },
+  {
+    id: 15,
+    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80',
+    category: 'music',
+    location: 'rooftop, Mexico City',
+    caption: 'Someone played guitar as the sun went down. Nobody recorded it. It only existed once.',
+    moods: ['in love', 'chaotic', 'warmth'],
+    resonated: 567,
+    user: '@onceonly',
+  },
+  {
+    id: 16,
+    image: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&q=80',
+    category: 'place',
+    location: 'unknown beach, Bali',
+    caption: 'Got lost. Found this. Stayed until the tide told me to leave.',
+    moods: ['dreamy', 'solitude', 'romantic'],
+    resonated: 489,
+    user: '@tidebound',
+  },
+];
+
+// ─── MAP PINS ───
+export const mapPins = [
+  { id: 1, name: 'Hidden Café Yūgen', category: 'café', lat: 35.661, lng: 139.670, description: 'Matcha and silence in Shimokitazawa', resonated: 214 },
+  { id: 2, name: 'The Lost Bookshelf', category: 'bookstore', lat: 51.513, lng: -0.205, description: 'First editions hiding in plain sight', resonated: 342 },
+  { id: 3, name: 'Fado Corner', category: 'café', lat: 38.710, lng: -9.135, description: 'Where sadness sounds beautiful', resonated: 189 },
+  { id: 4, name: 'Nonna\'s Kitchen', category: 'secret places', lat: 41.896, lng: 12.476, description: 'No menu. Just trust.', resonated: 612 },
+  { id: 5, name: 'The Basement', category: 'photo spots', lat: 40.686, lng: -73.975, description: 'Where real music still lives', resonated: 456 },
+  { id: 6, name: 'Dawn Point', category: 'photo spots', lat: 46.363, lng: 14.093, description: 'Wake up early. You\'ll understand.', resonated: 523 },
+  { id: 7, name: 'Le Champo Cinema', category: 'secret places', lat: 48.849, lng: 2.346, description: '35mm dreams in the Latin Quarter', resonated: 298 },
+  { id: 8, name: 'Vinyl Haven', category: 'bookstore', lat: 35.659, lng: 139.700, description: 'Albums that change your year', resonated: 391 },
+];
+
+// ─── COLLECTIONS ───
+export const collections = [
+  { id: 1, name: 'Places I\'d disappear to', count: 12, image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&q=80' },
+  { id: 2, name: 'Movies that changed me', count: 8, image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80' },
+  { id: 3, name: 'Music for metro rides', count: 23, image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&q=80' },
+  { id: 4, name: 'Cafés with good silence', count: 6, image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&q=80' },
+  { id: 5, name: 'Words that stayed', count: 15, image: 'https://images.unsplash.com/photo-1526243741027-444d633d7365?w=400&q=80' },
+  { id: 6, name: 'Nights I want to relive', count: 9, image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80' },
+  { id: 7, name: 'Architecture that breathes', count: 7, image: 'https://images.unsplash.com/photo-1495195134756-60a79b4b5c60?w=400&q=80' },
+];
+
+// ─── MOOD KEYWORDS ───
+export const moodOptions = [
+  'lonely', 'romantic', 'chaotic', 'productive', 'dreamy',
+  'rainy-night', 'existential', 'restless', 'in love', 'numb'
+];
+
+// ─── INTEREST CHIPS ───
+export const interestOptions = [
+  'underground music', 'anime', 'cafés', 'philosophy', 'streetwear',
+  'indie films', 'coding', 'photography', 'poetry', 'architecture', 'solitude'
+];
+
+// ─── MOOD COLORS (for wash effect) ───
+export const moodColors = {
+  lonely: 'rgba(100, 120, 180, 0.12)',
+  romantic: 'rgba(196, 122, 122, 0.12)',
+  chaotic: 'rgba(200, 80, 60, 0.12)',
+  productive: 'rgba(100, 180, 120, 0.12)',
+  dreamy: 'rgba(140, 120, 200, 0.12)',
+  'rainy-night': 'rgba(80, 100, 140, 0.12)',
+  existential: 'rgba(60, 60, 80, 0.15)',
+  restless: 'rgba(200, 169, 110, 0.12)',
+  'in love': 'rgba(200, 120, 140, 0.12)',
+  numb: 'rgba(100, 100, 100, 0.12)',
+};
